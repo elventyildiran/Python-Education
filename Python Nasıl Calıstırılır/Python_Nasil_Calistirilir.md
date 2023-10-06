@@ -109,7 +109,7 @@ Eğer Python3’ü kısıtlı kullanıcı hakları ile derleyip ev dizininize ku
     ./python3.7
 Diyelim ki Python3’ü $HOME/python adlı dizine kurdunuz. Önce şu komutla $HOME/python/bin adlı dizine ulaşıyoruz:
 
-cd $HOME/python/bin
+    cd $HOME/python/bin
 Ardından da şu komutu veriyoruz:
 
     ./python3.7
@@ -141,7 +141,7 @@ Elbette eğer sizin sisteminizdeki dosyanın adı .bash_profile veya .bashrc ise
 7. Artık hangi konumda bulunursanız bulunun, şu komutu vererek Python3’ü başlatabilirsiniz:
 
     py3
-    
+
 Burada da eğer yukarıdaki komut Python3’ü çalıştırmanızı sağlamıyorsa, bazı şeyleri eksik veya yanlış yapmış olabilirsiniz. Yardım almak için forum.yazbel.com adresine uğrayabilirsiniz.
 
 Python3’ü başarıyla kurup çalıştırabildiğinizi varsayarak yolumuza devam edelim.
