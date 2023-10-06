@@ -61,3 +61,87 @@ Python kaynaktan derlendiğinde çalıştırılabilir dosya /usr/local/bin/ dizi
     "ln -s /usr/local/bin/python3.7 /usr/bin/py3"
 
 Tabii bu komutu yetkili kullanıcı olarak vermeniz gerektiğini söylememe herhalde gerek yoktur. Bu komutu verdikten sonra artık sadece py3 komutu ile Python programlama dilini başlatabilirsiniz.
+
+--Çok Önemli Bir Uyarı--
+
+Bir önceki adımda anlattığımız gibi Python3’ü resmi sitesinden indirip kendiniz derlediniz. Gayet güzel. Ancak bu noktada çok önemli bir konuya dikkatinizi çekmek isterim. En baştan beri söylediğimiz gibi, Python programlama dili GNU/Linux işletim sistemlerinde çok önemli bir yere sahiptir. Öyle ki bu programlama dili, kullandığınız dağıtımın belkemiği durumunda olabilir.
+
+Örneğin Ubuntu GNU/Linux dağıtımında pek çok sistem aracı Python ile yazılmıştır. Bu yüzden, sistemdeki öntanımlı Python sürümünün ne olduğu ve dolayısıyla python komutunun hangi Python sürümünü çalıştırdığı çok önemlidir. Çünkü sisteminizdeki hayati bazı araçlar, python komutunun çalıştırdığı Python sürümüne bel bağlamış durumdadır. Dolayısıyla sizin bu python komutunun çalıştırdığı Python sürümüne dokunmamanız gerekir.
+
+Mesela eğer kullandığınız işletim sisteminde python komutu Python’ın 2.x sürümlerinden birini çalıştırıyorsa sembolik bağlar veya başka araçlar vasıtasıyla python komutunu Python’ın başka bir sürümüne bağlamayın. Bu şekilde bütün sistemi kullanılmaz hale getirirsiniz. Elbette eğer kurulum aşamasında tarif ettiğimiz gibi, Python3’ü make install yerine make altinstall komutu ile kurmaya özen gösterdiyseniz, sonradan oluşturduğunuz bağ dosyasını silip python komutunu yine sistemdeki öntanımlı sürüme bağlayabilirsiniz. Bu şekilde her şey yine eski haline döner. Ama eğer Python’ı make install komutuyla kurmanızdan ötürü sistemdeki öntanımlı Python sürümüne ait dosyaları kaybettiyseniz sizin için yapılacak fazla bir şey yok… Sistemi tekrar eski kararlı haline getirmek için kan, ter ve gözyaşı dökeceksiniz…
+
+Aynı şekilde, kullandığınız dağıtımda python3 komutunun öntanımlı olarak belirli bir Python sürümünü başlatıp başlatmadığı da önemlidir. Yukarıda python komutu ile ilgili söylediklerimiz python3 ve buna benzer başka komutlar için de aynen geçerli.
+
+Örneğin, Ubuntu GNU/Linux dağıtımında python komutu sistemde kurulu olan Python 2.x sürümünü; python3 komutu ise sistemde kurulu olan Python 3.x sürümünü çalıştırdığından, biz kendi kurduğumuz Python sürümleri için, sistemdeki sürümlerle çakışmayacak isimler seçtik. Mesela kendi kurduğumuz Python3 sürümünü çalıştırmak için py3 gibi bir komut tercih ettik.
+
+İyi bir test olarak, Python programlama dilini kendiniz kaynaktan derlemeden önce şu komutun çıktısını iyice inceleyebilirsiniz:
+
+    "ls -g {,/usr{,/local}}/bin | grep python"
+
+Bu komut iki farklı Python sürümünün kurulu olduğu sistemlerde şuna benzer bir çıktı verir (çıktı kırpılmıştır):
+
+    "dh_python2
+    dh_python3
+    pdb2.7 -> ../lib/python2.7/pdb.py
+    pdb3.7 -> ../lib/python3.7/pdb.py
+    py3versions -> ../share/python3/py3versions.py
+    python -> python2.7
+    python2 -> python2.7
+    python2.7
+    python3 -> python3.7
+    python3.7 -> python3.7mu
+    python3.7mu
+    python3mu -> python3.7mu
+    pyversions -> ../share/python/pyversions.py"
+
+Yatık harflerle gösterdiğimiz kısımlara dikkat edin. Gördüğünüz gibi python ve python2 komutları bu sistemde Python’ın 2.7 sürümünü çalıştırıyor. python3 komutu ise Python’ın 3.7 sürümünü… Dolayısıyla yukarıdaki çıktıyı aldığımız bir sistemde kendi kurduğumuz Python sürümlerine ‘python’, ‘python2’ veya ‘python3’ gibi isimler vermekten kaçınmalıyız.
+
+Sözün özü, bir GNU/Linux kullanıcısı olarak sistemdeki öntanımlı hiçbir Python sürümünü silmemeli, öntanımlı sürüme ulaşan komutları değiştirmemelisiniz. Eğer mesela sisteminizde python3 komutu halihazırda bir Python sürümünü çalıştırıyorsa, siz yeni kurduğunuz Python sürümüne ulaşmak için öntanımlı adla çakışmayacak başka bir komut adı kullanın. Yani örneğin sisteminizde python3 komutu Python’ın 3.7 sürümünü çalıştırıyorsa, siz yeni kurduğunuz sürümü çalıştırmak için py3 gibi bir sembolik bağ oluşturun. Bırakın öntanımlı komut (python, python3 vb.) öntanımlı Python sürümünü çalıştırmaya devam etsin.
+
+Asla unutmayın. Siz bir programcı adayı olarak, program yazacağınız işletim sistemini enine boyuna tanımakla yükümlüsünüz. Dolayısıyla işletim sisteminizi kararsız hale getirecek davranışları bilmeli, bu davranışlardan kaçınmalı, yanlış bir işlem yaptığınızda da nasıl geri döneceğinizi bilmelisiniz. Hele ki bir programı kaynaktan derlemeye karar vermişseniz…
+
+Bu ciddi uyarıyı da yaptığımıza göre gönül rahatlığıyla yolumuza devam edebiliriz.
+
+--Python3’ü Ev Dizinine Kuranlar--
+
+Eğer Python3’ü kısıtlı kullanıcı hakları ile derleyip ev dizininize kurduysanız yukarıdaki komutlar Python’ı çalıştırmanızı sağlamayacaktır. Python3’ü ev dizinine kurmuş olan kullanıcılar Python3’ü çalıştırabilmek için, öncelikle komut satırı aracılığıyla Python3’ü kurdukları dizine, oradan da o dizin altındaki bin/ klasörüne ulaşacak ve orada şu komutu verecek:
+
+    ./python3.7
+Diyelim ki Python3’ü $HOME/python adlı dizine kurdunuz. Önce şu komutla $HOME/python/bin adlı dizine ulaşıyoruz:
+
+cd $HOME/python/bin
+Ardından da şu komutu veriyoruz:
+
+    ./python3.7
+    Komutun başındaki ./ işaretinin ne işe yaradığını artık adınız gibi biliyorsunuz…
+    Elbette ben burada kurduğunuz Python sürümünün 3.7 olduğunu varsaydım. Eğer farklı bir sürüm kurduysanız yukarıdaki komutu ona göre yazmanız gerekiyor.
+
+Eğer isterseniz bu şekilde çalışmaya devam edebilirsiniz. Ancak her defasında Python’ın kurulu olduğu dizin altına gelip orada ./python3.7 komutunu çalıştırmak bir süre sonra eziyete dönüşecektir. İşlerinizi kolaylaştırmak için şu işlemleri takip etmelisiniz:
+
+1. ev dizininizin altında bulunan .profile (veya kullandığınız dağıtıma göre .bash_profile ya da .bashrc) adlı dosyayı açın.
+
+2. Bu dosyanın en sonuna şuna benzer bir satır yerleştirerek Python’ı çalıştırmamızı sağlayan dosyanın bulunduğu dizini yola ekleyin:
+
+    export PATH=$PATH:$HOME/python/bin/
+
+3. $HOME/python/bin/ satırı Python3’ün çalıştırılabilir dosyasının hangi dizin altında olduğunu gösteriyor. Ben burada Python3’ün çalıştırılabilir dosyasının $HOME/python/bin dizini içinde olduğunu varsaydım. O yüzden de $HOME/python/bin/ gibi bir satır yazdım. Ama eğer Python3’ün çalıştırılabilir dosyası sizde farklı bir dizindeyse bu satırı ona göre yazmalısınız.
+
+4. Kendi sisteminize uygun satırı dosyaya ekledikten sonra dosyayı kaydedip çıkın. Dosyada yaptığımız değişikliğin etkin hale gelebilmesi için şu komutu verin:
+
+    source .profile
+
+Elbette eğer sizin sisteminizdeki dosyanın adı .bash_profile veya .bashrc ise yukarıdaki komutu ona göre değiştirmelisiniz.
+
+5. Daha sonra $HOME/python/bin/python3.7 adlı dosyaya $HOME/python/bin/ dizini altından mesela py3 gibi bir sembolik bağ verin:
+
+    ln -s $HOME/python/bin/python3.7 $HOME/python/bin/py3
+
+6. Bilgisayarınızı yeniden başlatın.
+
+7. Artık hangi konumda bulunursanız bulunun, şu komutu vererek Python3’ü başlatabilirsiniz:
+
+    py3
+    
+Burada da eğer yukarıdaki komut Python3’ü çalıştırmanızı sağlamıyorsa, bazı şeyleri eksik veya yanlış yapmış olabilirsiniz. Yardım almak için forum.yazbel.com adresine uğrayabilirsiniz.
+
+Python3’ü başarıyla kurup çalıştırabildiğinizi varsayarak yolumuza devam edelim.
